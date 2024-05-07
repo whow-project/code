@@ -1,0 +1,1219 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+dcterms:modified	rdf:type	owl:AnnotationProperty .
+dcterms:description	rdf:type	owl:AnnotationProperty .
+dcterms:issued	rdf:type	owl:AnnotationProperty .
+dcterms:title	rdf:type	owl:AnnotationProperty .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+skos:Concept	rdf:type	owl:Class .
+@prefix ns4:	<https://w3id.org/italia/env/onto/top/> .
+ns4:Organisation	rdf:type	owl:Class .
+@prefix ns5:	<https://w3id.org/whow/onto/water-monitoring/> .
+ns5:ChemicalSubstance	rdf:type	owl:Class .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+ns5:ChemicalSubstance	rdfs:subClassOf	ns5:WaterObservablePropertyObject ;
+	rdfs:label	"Chemical Substance"@en .
+@prefix ns7:	<https://w3id.org/whow/onto/> .
+ns5:ChemicalSubstance	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"This class represents the chemical substances. A controlled vocabulary can be constructed for this class based on the CAS numbering of the chemical substances."@en ;
+	owl:disjointWith	ns5:RadioactivityObject .
+@prefix ns8:	<https://w3id.org/whow/onto/health-monitoring/> .
+ns8:Disease	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Concept ;
+	rdfs:label	"Disease"@en ,
+		"Malattia"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class that represents the disease (e.g., COVID-19)."@en ,
+		"La classe che rappresenta una malattia (e.g., COVID-19, la varicella, etc.)"@it ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns8:DiseaseType	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Concept ,
+		ns4:Characteristic ;
+	rdfs:label	"Tipo di Malattia"@it ,
+		"Disease Type"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe dei tipi di malattia."@it ,
+		"The class of the types of diseases"@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns8:narrower	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"narrower"@en ,
+		"sotto insieme"@it ;
+	rdfs:domain	ns8:DiseaseType ;
+	rdfs:range	ns8:DiseaseType ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che consente di modellare una tassonomia di tipi di malattie."@it ,
+		"Property used to create a taxonomy of different types of diseases."@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+@prefix ns9:	<https://w3id.org/whow/onto/water-indicator/> .
+ns9:WaterIndicator	rdf:type	owl:Class .
+@prefix ns10:	<https://w3id.org/italia/onto/Indicator/> .
+ns9:WaterIndicator	rdfs:subClassOf	ns10:Indicator ,
+		_:b10024 ,
+		_:b10025 ;
+	rdfs:label	"Water Indicator"@en ;
+	rdfs:isDefinedBy	ns7:water-indicator ;
+	rdfs:comment	"The class of the different types of indicator defined for calculate the quality of the water. Examples are LTLeco, LIMeco, etc."@en .
+@prefix dc:	<http://purl.org/dc/elements/1.1/> .
+dc:description	rdf:type	owl:AnnotationProperty .
+@prefix ns12:	<https://w3id.org/italia/env/onto/inspire-mf/> .
+ns12:Indicator	rdf:type	owl:Class .
+ns12:isIndicatorOf	rdf:type	owl:ObjectProperty .
+ns4:Characteristic	rdf:type	owl:Class .
+ns4:Concept	rdf:type	owl:Class .
+ns4:Description	rdf:type	owl:Class .
+ns4:Entity	rdf:type	owl:Class .
+ns4:Eventuality	rdf:type	owl:Class .
+ns4:Location	rdf:type	owl:Class .
+ns4:Value	rdf:type	owl:Class .
+ns4:atTime	rdf:type	owl:ObjectProperty .
+ns4:isClassifiedBy	rdf:type	owl:ObjectProperty .
+ns7:health-monitoring	rdf:type	owl:Ontology .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+ns7:health-monitoring	dcterms:modified	"2023-06-06"^^xsd:date ;
+	rdfs:label	"Health Care Indicator Monitoring Ontology"@en ,
+		"Ontologia di Monitoraggio di Indicatori della Salute"@it .
+@prefix ns14:	<https://w3id.org/italia/env/onto/> .
+ns7:health-monitoring	owl:imports	ns14:top ;
+	owl:versionInfo	"Version 0.3 - June 2023 - modified some elements of the ontology (introduction of the property hasScope for the Cohort and related elements, revision of the organisations involved in the computation of some indicators)"@en ;
+	dcterms:description	"Questa \u00E8 l'ontologia del progetto WHOW utilizzata per rappresentare un insieme di indicatori utilizzati nel settore sanitario della regione Lombardia per monitorare alcuni parametri sanitari (ad esempio, la diffusione di malattie infettive, la distribuzione di farmaci, l'andamento delle cause di morte e l'accesso a specifiche strutture di ricovero). L'ontologia \u00E8 generale per modellare indicatori in ambito sanitario e non \u00E8 strettamente dipendente dai dataset (aperti) della regione Lombardia."@it ,
+		"This is the ontology of the WHOW project that used to represent a set of indicators used in the health sector of Lombardy region to monitor some health parameters (e.g., spread of infectious diseases, distribution of drugs, causes of deaths and access to specific inpatient facilities). The ontology is general to model indicators in the health domain and not strictly dependent on Lombarday region (open) datasets."@en ;
+	dcterms:issued	"2022-10-03"^^xsd:date ;
+	dcterms:title	"Ontologia di Monitoraggio di Indicatori della Salute"@it ,
+		"Healthcare Indicator Monitoring Ontology"@en ;
+	owl:versionIRI	<urn:absolute:https//w3id.org/whow/onto/health-monitoring/0.3> ;
+	dc:description	<https://raw.githubusercontent.com/whow-project/semantic-assets/main/ontologies/graphical-representation-ontologies/health-monitoring.png> .
+ns8:CauseOfDeath	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10007 ,
+		ns4:Concept ;
+	rdfs:label	"Cause of Death"@en ,
+		"Causa di Morte"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe di tutte quelle circostanze/situazioni/condizioni morbose che portano direttamente alla morte della persona."@it ,
+		"The class of all those circumstances/situations/pathological conditions that lead directly to a person's death."@en ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:ClinicalCohort	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:Population ,
+		_:b10008 ;
+	rdfs:label	"Coorte Clinica"@it ,
+		"Clinical Cohort"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of the sole clinical cohort (actually a subclass of the general population) on which the health indicator is calculated. It is characterised by criteria or parameters for its composition (e.g. gender, age) and is associated with a generic scope that varies according to the type of indicator being calculated."@en ,
+		"L'insieme della sola popolazione clinica (\u00E8 infatti sotto classe della popolazione generale) che rappresenta la popolazione su cui si calcola l'indicatore di salute. Essa \u00E8 caratterizzata da criteri o parametri per la sua composizione (e.g., sesso, et\u00E0) ed \u00E8 associata a un generico ambito che varia a seconda del tipo di indicatore che viene calcolato."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:CohortCriteriaDescription	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10009 ,
+		_:b10010 ,
+		ns4:Description ;
+	rdfs:label	"Cohort Criteria Description"@en ,
+		"Descrizione dei Criteri per Dimensione Popolazione Clinica"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe rappresenta una reificazione e implementa il design pattern dell'ontologia Description. Grazie a questo pattern \u00E8 possibile descrivere  la dimensione della coorte clinica sulla base di criteri, non sempre noti a priori, e dei relativi valori."@it ,
+		"The class represents a reification and implements the ontology design pattern named Description. With this pattern it is possible to describe the dimension of the clinical cohort on the basis of criteria, not always known a priori, and their values,"@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:Criterion	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Characteristic ;
+	rdfs:label	"Criterio"@it ,
+		"Criterion"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe che rappresenta criteri. Nello specifico contesto di questa ontologia sono i criteri attraverso cui viene descritta la dimensione della popolazione clinica che concorre al calcolo dell'indicatore di salute. Esempi di criteri includono: et\u00E0. sesso, anno di inizio sintomi per una malattia infettiva, ecc."@it ,
+		"The class representing criteria. In the specific context of this ontology, these are the criteria by which the  dimension of the clinical population contributing to the calculation of the health indicator is described. Examples of criteria include: age. gender, year of start of symptoms for an infectious disease, etc."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:DrugDistributionIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:HealthcareIndicatorCalculation ;
+	rdfs:label	"Calcolo dell'Indicatore Distribuzione Farmaci"@it ,
+		"Drug Distribution Indicator Calculation"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of the drug distribution indicator calculation. This class is equivalent to the 'health indicator calculation when the health indicator is 'drug distribution'.'"@en ,
+		"La classe del calcolo dell'indicatore relativo alla distribuzione dei farmaci. Questa classe \u00E8 equivalente al 'calcolo dell'indicatore di salute quando l'indicatore sanitario \u00E8  'distribuzione farmaci'.'"@it ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:DrugType	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10011 ,
+		_:b10012 ,
+		ns4:Concept ;
+	rdfs:label	"Tipo di Farmaco"@it ,
+		"Drug Type"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of categories of drugs consumed by people."@en ,
+		"La classe delle tipologie di farmaci assunte da persone."@it ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:GroupCauseOfDeath	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Concept ;
+	rdfs:label	"Gruppo di cause di morte"@it ,
+		"Group pf Causes of Death"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Classificazione formata da macro-categorie di cause che portano alla morte di persone."@it ,
+		"Classification consisting of macro-categories of causes leading to the death of people."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:HealthConditionIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:HealthcareIndicatorCalculation ;
+	rdfs:label	"Calcolo dell'Indicatore Condizioni di Salute Generali"@it ,
+		"Health Condition Indicator Calculation"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of the indicator calculation related to the general health condition of the population. This class is equivalent to the 'health indicator calculation when the health indicator is 'general health conditions'.'"@en ,
+		"La classe del calcolo dell'indicatore relativo alle condizioni generali di salute della popolazione. Questa classe \u00E8 equivalente al 'calcolo dell'indicatore di salute quando l'indicatore sanitario \u00E8  'condizioni di salute generali'.'"@it ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:HealthOrganisation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Organisation ;
+	rdfs:label	"Organizzazione Sanitaria"@en ,
+		"Health Organisation"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Una generica organizzazione che opera nel contesto sanitario. Questa classe include organizzazioni tipo le ASL o le strutture di ricovero."@it ,
+		"A generic organisation operating in the healthcare context. This class includes organisations such as ASLs or in-patient facilities."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:HealthcareAuthority	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10013 ,
+		ns8:HealthOrganisation ;
+	rdfs:label	"Agenzia/Azienda Sanitaria"@it ,
+		"Healthcare Authority"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of specific organisations that usually deal with health care in a territorial context (in the case of the Lombardy Region they are named ATS, in other regions they are called ASL or AUSL). These typically have the following functions\n1) negotiation and purchase of health and socio-health services from accredited facilities;\n2) governance of the person's care pathway throughout the network of health, social and health services\n3) governance of primary and contracted primary care;\n4) governance and promotion of health education, prevention, care, treatment and rehabilitation programmes;\n5) promotion of medical and veterinary food safety;\n6) prevention and control of health in living and working environments, including periodic plant and technological control;\n7) veterinary public health\n8) implementation of regional guidelines and monitoring of expenditure on pharmaceuticals, dietetics and prosthetics;\n9) supervision and control of healthcare, social and health facilities and units."@en ,
+		"La classe delle organizzazioni specifiche che di solito in ambito territoriale si occupano di assistenza sanitaria (nel caso di Regione Lombardia sono le ATS, in altre regioni si chiamano ASL o AUSL). Queste hanno tipicamente le seguenti funzioni:\n1) negoziazione e acquisto delle prestazioni sanitarie e sociosanitarie dalle strutture accreditate;\n2) governo del percorso di presa in carico della persona in tutta la rete dei servizi sanitari, sociosanitari e sociali;\n3) governo dell\u2019assistenza primaria e del convenzionamento delle cure primarie;\n4) governo e promozione dei programmi di educazione alla salute, prevenzione, assistenza, cura e riabilitazione;\n5) promozione della sicurezza alimentare medica e medica veterinaria;\n6) prevenzione e controllo della salute negli ambienti di vita e di lavoro, compreso il controllo periodico impiantistico e tecnologico;\n7) sanit\u00E0 pubblica veterinaria;\n8) attuazione degli indirizzi regionali e monitoraggio della spesa in materia di farmaceutica, dietetica e protesica;\n9) vigilanza e controllo sulle strutture e sulle unit\u00E0 d\u2019offerta sanitarie, sociosanitarie e sociali."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en ;
+	owl:disjointWith	ns8:InpatientFacility .
+ns8:HealthcareIndicator	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10014 ,
+		ns4:Entity ;
+	rdfs:label	"Indicatore di Salute"@it ,
+		"Health Care Indicator"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe degli indicatori di salute. Utilizzata per poter creare un vocabolario controllato di indicatori in questo settore applicativo."@it ,
+		"The class of the health care indicator. It is used to create a controlled list of possible indicators to be used in the health sector."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:HealthcareIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10015 ,
+		_:b10016 ,
+		_:b10017 ,
+		_:b10018 ,
+		_:b10019 ,
+		ns12:Indicator ,
+		ns4:Eventuality ;
+	rdfs:label	"Healthcare Indicator Calculation"@en ,
+		"Calcolo dell'Indicatore di Salute"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class that represents the calculation of the health care indicator and thus brings together the indicator being calculated, the value resulting from the calculation, the clinical cohort used according to certain population breakdown criteria and the relevant territorial area."@en ,
+		"La classe che rappresenta il calcolo dell'indicatore di salute e che quindi mette insieme l'indicatore che viene calcolato, il valore risultante dal calcolo, la coorte clinica utilizzata in base a determinati criteri di suddivisione della popolazione e l'area territoriale di pertinenza."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:HospitalCareIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:HealthcareIndicatorCalculation ;
+	rdfs:label	"Hospital Care Indicator Calculation"@en ,
+		"Calcolo Indicatore Assistenza Ospedaliera"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"The class of the hospital care indicator calculation. This class is equivalent to the 'health indicator calculation when the health indicator is 'hospital care'.'"@en ,
+		"La classe del calcolo dell'indicatore relativo all'assistenza ospedaliera. Questa classe \u00E8 equivalente al 'calcolo dell'indicatore di salute quando l'indicatore sanitario \u00E8  'assistenza ospedaliera'.'"@it ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:IndicatorType	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Characteristic ,
+		ns4:Concept ;
+	rdfs:label	"Indicator Type"@en ,
+		"Tipo di Indicatore"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe dei diversi tipi di indicatori. Tipicamente nel settore sanitario, i tipi di indicatori sono: indicatore di processo, indicatore di risultato, indicatore di struttura."@it ,
+		"The class of the different types of indicators. Typically in the health care sector, types of indicators are: process indicator, outcome indicator, structure indicator."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:InfectiousDiseaseIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:HealthcareIndicatorCalculation ;
+	rdfs:label	"Calcolo dell'Indicatore Malattie Infettive"@it ,
+		"Infectious Disease Indicator Calculation"@en ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe del calcolo dell'indicatore relativo alla distribuzione delle malattie infettive. Questa classe \u00E8 equivalente al 'calcolo dell'indicatore di salute quando l'indicatore sanitario \u00E8  'diffusione delle malattie infettive'.'"@en ,
+		"The class of the specific calculation related to infectious diseases distribution. This class is equivalent to the Healthcare Indicator Calculation when the Healthcare Indicator is diffusion of infectious diseases."@en ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:InpatientFacility	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns8:HealthOrganisation ;
+	rdfs:label	"Inpatient Facility"@en ,
+		"Struttura di Ricovero e Cura"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Hospital care guarantees admission to accredited public and private hospitals for the diagnosis and treatment of acute or long-term illnesses that cannot be dealt with on an outpatient or home basis. The Ministry of Health, as part of the Health Information System\nHealth Information System collects information on public and private hospitalisation facilities and their activities (provenance: Italian Ministry of Health)"@en ,
+		"L\u2019assistenza ospedaliera garantisce il ricovero presso gli ospedali pubblici e privati accreditati per la diagnosi e la cura delle malattie acute o di lunga durata che non possono essere affrontate ambulatorialmente o a domicilio. Il Ministero della Salute, nell\u2019ambito del Sistema Informativo\nSanitario raccoglie informazioni sulla struttura di ricovero pubblica e privata e relative attivit\u00E0 della struttura (fonte Ministero della salute)"@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:Population	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10020 ,
+		ns4:Entity ;
+	rdfs:label	"Population"@en ,
+		"Popolazione"@it ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"La classe che rappresenta la popolazione (di una regione in questa ontologia) totale, utilizzata nel calcolo degli indicatori di salute."@it ,
+		"The class of the entire popolation considered when computing specific healthcare indicator calculation operations"@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:affectedBy	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns8:hasScope ;
+	rdfs:label	"affetta da"@it ,
+		"affected by"@en ;
+	rdfs:domain	ns8:ClinicalCohort ;
+	rdfs:range	_:b10003 ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che consente di collegare la coorte clinica con la malattia  di cui sono affetti."@it ,
+		"Property that links the clinical cohort with the disease they are affected by."@en ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:assumed	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns8:hasScope ;
+	rdfs:label	"assumed"@en ,
+		"assunto"@it ;
+	rdfs:domain	ns8:ClinicalCohort ;
+	rdfs:range	ns8:DrugType ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che specializza la propriet\u00E0 ha ambito usata per definire la coorte clinica che ha assunto specifiche tipologie di farmaci, quando l'indicatore da calcolare riguarda il tasso di distribuzione di farmaci."@it ,
+		"Property that specialises has scope, used to define the clinical cohort that assumed specific types of drugs, when the indicator to be calculated concerns the drug distribution rate."@en ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:diedFrom	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns8:hasScope ;
+	rdfs:label	"died from"@en ,
+		"morte per"@it ;
+	rdfs:domain	ns8:ClinicalCohort ;
+	rdfs:range	ns8:CauseOfDeath ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che specializza la propriet\u00E0 ha ambito usata per definire la coorte clinica deceduta per  specifiche cause di morte, quando l'indicatore da calcolare riguarda il numero dei decessi per specifiche cause di morte."@it ,
+		"Property that specialises the has scope properties in order to define the clinical cohort died from causes of death when the indicator to be computed is about  the number of deaths from specific causes of death."@en ;
+	owl:versionInfo	"unstable"@en ,
+		"provvisoria"@it .
+ns8:doneForHCIndicator	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"done for healthcare indicator"@en ,
+		"fatto per indicatore sanitario"@it ;
+	rdfs:domain	ns8:HealthcareIndicatorCalculation ;
+	rdfs:range	ns8:HealthcareIndicator ;
+	rdfs:comment	"Property that links the calculation of an indicator with the healthcare indicator itself."@en ,
+		"Propriet\u00E0 che collega il calcolo dell'indicatore, con l'indicatore stesso."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:hasCohortCriteriaDescription	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"ha descrizione criteri coorte clinica"@it ,
+		"has clinical cohort criteria description"@en ;
+	rdfs:domain	ns8:ClinicalCohort ;
+	rdfs:range	ns8:CohortCriteriaDescription ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che lega la coorte clinica con la descrizioni dei criteri che ne determinano la sua dimensione."@it ,
+		"Property that links the clinical cohort with the description of the criteria that determine the dimension of the cohort."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:hasCriterion	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has criterion"@en ,
+		"ha criterio"@it ;
+	rdfs:domain	ns8:CohortCriteriaDescription ;
+	rdfs:range	ns8:Criterion ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che collega la descrizione dei criteri per la dimensione della coorte clinica a ogni singolo criterio."@it ,
+		"Property that links the description of the criteria for the dimension of the clinical cohort to each single criterion."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:hasHealthcareIndicatorValue	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has healthcare indicator value"@en ,
+		"ha valore indicatore di salute"@it ;
+	rdfs:domain	ns8:HealthcareIndicatorCalculation ;
+	rdfs:range	ns4:Value ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 utilizzata per collegare il calcolo dell'indicatore di salute con il relativo valore."@it ,
+		"Property used to link the healthcare indicator calculation with the related value."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:hasScope	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"ha ambito"@it ,
+		"has scope"@en ;
+	rdfs:domain	ns8:ClinicalCohort ;
+	rdfs:range	ns4:Concept ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 generica che collega la coorte utilizzata nel calcolo dell'indicatore un contesto (ad esempio, malattia di cui affetta, uso di droghe, cause per cui \u00E8 morta)."@it ,
+		"Generic property that links the cohort used in the indicator calculation to the context (e.g., disease, drug use, causes of deaths)"@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:isResponsibleFor	rdf:type	owl:ObjectProperty ;
+	owl:inverseOf	ns8:isUnderResponsibilityOf ;
+	rdfs:label	"\u00E8 responsabile di"@it ,
+		"is responsible for"@en ;
+	rdfs:domain	ns8:HealthcareAuthority ;
+	rdfs:range	ns4:Location ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Property used to indicate the responsibility of a health organisation with respect to a certain territorial area. The jurisdiction of the health organisation."@en ,
+		"Propriet\u00E0 utilizzata per indicare la responsabilit\u00E0 di un'organizzazione sanitaria rispetto a una certa area territoriale. La giurisdizione dell'azienda sanitaria."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:isTerritoriallyCompetentFor	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"\u00E8 territorialmente competente per"@it ,
+		"is territorial competent for"@en ;
+	rdfs:domain	ns8:HealthcareAuthority ;
+	rdfs:range	ns8:InpatientFacility ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che collega l'autorit\u00E0 competente in materia sanitaria, tipicamente locale, con le relative strutture di ricovero di pertinenza."@it ,
+		"Property that connects the typically local health authority with the relevant inpatient facilities."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:isUnderResponsibilityOf	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"is under responsiblity of"@en ,
+		"\u00E8 sotto la responsabilit\u00E0 di"@it ;
+	rdfs:domain	ns4:Location ;
+	rdfs:range	ns8:HealthcareAuthority ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 utilizzata per collegare un'area geografica a l'autorit\u00E0 sanitaria di competenza di quell'area."@it ,
+		"Property used to link the geographical area which is of competence of a specific healthcare authority."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:ofClinicalCohort	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	owl:topObjectProperty ;
+	rdfs:label	"di coorte clinica"@it ,
+		"of clinical cohort"@en ;
+	rdfs:domain	ns8:HealthcareIndicatorCalculation ;
+	rdfs:range	ns8:ClinicalCohort ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 utilizzata per indicare la coorte clinica considerata nel calcolo dell'indicatore di salute."@it ,
+		"Property used to specify the clinical cohort for the healthcare indicator calculation."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:subIndicator	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"sub indicator"@en ,
+		"sotto indicatore"@it ;
+	rdfs:domain	ns8:HealthcareIndicatorCalculation ;
+	rdfs:range	ns8:HealthcareIndicatorCalculation ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Property used to create a taxonomy of the calculation of healthcare indicators."@en ,
+		"Propriet\u00E0 utilizzata per creare tassonomie dei calcoli degli indicatori di salute. Utile quando alcuni calcoli dipendono da altri."@it ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+ns8:totalValue	rdf:type	owl:DatatypeProperty ;
+	rdfs:label	"total value"@en ,
+		"valore totale"@it ;
+	rdfs:domain	ns8:Population ;
+	rdfs:range	xsd:float ;
+	rdfs:isDefinedBy	ns7:health-monitoring ;
+	rdfs:comment	"Propriet\u00E0 che indica il valore totale della popolazione in una certa area di riferimento."@it ,
+		"Property that indicates the total popolation of a certain area of reference."@en ;
+	owl:versionInfo	"stabile"@it ,
+		"stable"@en .
+@prefix ns15:	<http://www.w3.org/ns/prov#> .
+ns15:wasDerivedFrom	rdf:type	owl:AnnotationProperty .
+@prefix ns16:	<https://w3id.org/italia/env/onto/inspire-emf/> .
+ns16:FeatureOfInterest	rdf:type	owl:Class .
+ns7:hydrography	rdf:type	owl:Ontology ;
+	dcterms:modified	"2023-11-08"^^xsd:date ;
+	rdfs:label	"Hydrography Ontology"@en ;
+	rdfs:comment	"Ontology for describing the hydrography. It includes concepts such as water basins and the classification of water bodies"@en ,
+		"Ontologia per la descrizione dell'idrografia. Include concetti quali i bacini idrici e la classificazione dei corpi idrici. \u00C8 semanticamente allineata a concetti definiti nell'INSPIRE registry."@it ;
+	owl:versionInfo	"version 0.2 - refactor URI of imported concept"@en ;
+	dcterms:description	"Ontologia per la descrizione dell'idrografia. Include concetti quali i bacini idrici e la classificazione dei corpi idrici. \u00C8 semanticamente allineata a concetti definiti nell'INSPIRE registry."@it ,
+		"Ontology for describing the hydrography. It includes concepts such as water basins and the classification of water bodies"@en ;
+	dcterms:issued	"2022-01-10"^^xsd:date ;
+	dcterms:title	"Ontologia dell'Idrografia"@it ,
+		"Hydrography Ontology"@en ;
+	owl:versionIRI	<https://w3id.org/whow/onto/hydrography/0.2> ;
+	dc:description	<https://raw.githubusercontent.com/whow-project/semantic-assets/main/ontologies/graphical-representation-ontologies/hydrography-ontology.png> .
+@prefix ns17:	<https://w3id.org/whow/onto/hydrography/> .
+ns17:CoastalWaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"Coastal Water Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"The class of coastal water body; that is, a marine water body bordering a coast"@en .
+@prefix ns18:	<http://inspire.ec.europa.eu/featureconcept/> .
+ns17:CoastalWaterBody	ns15:wasDerivedFrom	ns18:WFDCoastalWater .
+ns17:GroundwaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"Groundwater Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"A distinct volume of groundwater within an aquifer or system of aquifers, which is hydraulically isolated from nearby groundwater bodies."@en ;
+	ns15:wasDerivedFrom	ns18:GroundWaterBody .
+ns17:LakeWaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"Lake Water Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"A body of standing inland surface water."@en ;
+	ns15:wasDerivedFrom	ns18:WFDLake .
+ns17:MarineWaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"Marine Water"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"The waters, the seabed and subsoil on the seaward side of the baseline from which the extent of territorial waters is measured"@en .
+ns17:RiverWaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"River Water Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"A body of inland water flowing for the most part on the surface of the land but which may flow underground for part of its course."@en ;
+	ns15:wasDerivedFrom	ns18:WFDRiver .
+ns17:TransitionalWaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterBody ;
+	rdfs:label	"Transitional Water Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"Bodies of surface water in the vicinity of river mouths which are partly saline in character as a result of their proximity to coastal waters but which are substantially influenced by freshwater flows."@en ;
+	ns15:wasDerivedFrom	ns18:WFDTransitionalWater .
+ns17:WaterBasin	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterFeature ,
+		_:b10021 ;
+	rdfs:label	"Water Basin"@en ;
+	rdfs:isDefinedBy	ns7:hydrography .
+ns17:WaterBody	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns17:WaterFeature ,
+		_:b10022 ,
+		_:b10023 ;
+	rdfs:label	"Water Body"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"Abstract class representing a WFD - Water Framework Directive body of surface water or body of groundwater"@en ;
+	ns15:wasDerivedFrom	ns18:WFDWaterBody .
+ns17:WaterFeature	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns16:FeatureOfInterest ;
+	rdfs:label	"Water Feature"@en ;
+	rdfs:isDefinedBy	ns7:hydrography ;
+	rdfs:comment	"A specific feature of interest in the hydrography context."@en .
+ns17:belongsToWaterBasin	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"belongs to water basin"@en ;
+	rdfs:domain	ns17:WaterBody ;
+	rdfs:range	ns17:WaterBasin ;
+	rdfs:comment	"This property links the water body to the water basin it belongs"@en .
+ns17:isSubWaterBasin	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"is sub water basin"@en ;
+	rdfs:domain	ns17:WaterBasin ;
+	rdfs:range	ns17:WaterBasin ;
+	rdfs:comment	"This property is used to represent hierarchies of water basin since water basins can be formed by other water basins."@en .
+ns12:hasFeatureOfInterest	rdf:type	owl:ObjectProperty .
+ns10:Indicator	rdf:type	owl:Class .
+ns10:IndicatorCalculation	rdf:type	owl:Class .
+ns10:Parameter	rdf:type	owl:Class .
+ns10:forIndicator	rdf:type	owl:ObjectProperty .
+ns10:isIndicatorCalculationOf	rdf:type	owl:ObjectProperty .
+@prefix ns19:	<https://w3id.org/iwhow/onto/water-indicator/> .
+ns19:isWaterIndicatorCalculationOf	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns10:isIndicatorCalculationOf ,
+		ns12:hasFeatureOfInterest ;
+	rdfs:label	"is water indicator calculation of"@en ;
+	rdfs:domain	ns9:WaterIndicatorCalculation ;
+	rdfs:range	ns17:WaterFeature ;
+	rdfs:comment	ns7:water-indicator ,
+		"Property used to indicate the water body for which the indicator is calculated."@en .
+ns7:water-indicator	rdf:type	owl:Ontology ;
+	rdfs:label	"Water Indicator Ontology"@en ;
+	owl:imports	ns7:water-monitoring ;
+	rdfs:isDefinedBy	ns7:water-indicator ;
+	owl:versionInfo	"version 0.2 - overall revision of the ontology"@en ;
+	owl:versionIRI	<https://w3id.org/whow/onto/water-indicator/0.2> ;
+	dc:description	<https://raw.githubusercontent.com/whow-project/semantic-assets/main/ontologies/graphical-representation-ontologies/water-indicator.png> .
+ns9:WaterIndicatorCalculation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns10:IndicatorCalculation ,
+		ns12:Indicator ,
+		_:b10026 ,
+		_:b10027 ,
+		_:b10028 ,
+		_:b10029 ,
+		_:b10030 ;
+	rdfs:label	"Water Indicator Calculation"@en ;
+	rdfs:isDefinedBy	ns7:water-indicator ;
+	rdfs:comment	"The class represents the situation of computing an indicator related to the quality of the water. It allows to represent the value of the calculation in a certain time period for an indicator."@en .
+ns9:WaterIndicatorParameter	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns10:Parameter ,
+		ns4:Parameter ,
+		_:b10031 ;
+	rdfs:label	"Water Indicator Parameter"@en ;
+	rdfs:isDefinedBy	ns7:water-indicator ;
+	rdfs:comment	"This class represents a specific parameter of the water indicator used when degrees of values are to be indicated. An example can be the case of an indicator that can be good, sufficient or insufficient according to range of values."@en .
+ns9:forWaterIndicator	rdf:type	owl:ObjectProperty ,
+		owl:FunctionalProperty ;
+	rdfs:subPropertyOf	ns10:forIndicator ;
+	owl:inverseOf	ns9:isWaterIndicatorOf ;
+	rdfs:label	"for water indicator"@en ;
+	rdfs:domain	ns9:WaterIndicatorCalculation ;
+	rdfs:range	ns9:WaterIndicator ;
+	rdfs:comment	ns7:water-indicator ,
+		"Property that allows one to specify the indicator that is being calculated."@en .
+ns9:hasWaterIndicatorParameter	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has water indicator parameter"@en ;
+	rdfs:domain	ns9:WaterIndicator ;
+	rdfs:range	ns9:WaterIndicatorParameter ;
+	rdfs:comment	ns7:water-indicator ,
+		"Property used to specify a characteristic for the a water indicator"@en .
+ns9:isWaterIndicatorOf	rdf:type	owl:ObjectProperty ,
+		owl:FunctionalProperty ;
+	rdfs:label	"is water indicator of"@en ;
+	rdfs:domain	ns9:WaterIndicator ;
+	rdfs:range	ns9:WaterIndicatorCalculation ;
+	rdfs:isDefinedBy	ns7:water-indicator ;
+	rdfs:comment	"Inverse property of for water indicator that links the water indicator to its calculation"@en .
+ns9:parametrizes	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"parametrizes"@en ;
+	rdfs:domain	ns9:WaterIndicatorParameter ;
+	rdfs:range	ns4:Value ;
+	rdfs:comment	ns7:water-indicator ,
+		"Property used to link a water indicator parameter to the values it parametrizes."@en .
+ns7:water-monitoring	rdf:type	owl:Ontology ;
+	dcterms:modified	"2023-11-10" ;
+	rdfs:label	"Water Monitoring Ontology"@en ,
+		"Ontologia del Monitoraggio delle Acque"@it ;
+	owl:imports	ns7:hydrography ,
+		ns12: ,
+		<https://w3id.org/italia/env/onto/place/> ;
+	rdfs:comment	"L'ontologia utilizzata nel progetto WHOW per rappresentare le osservazioni relative a diversi aspetti dell'acqua: qualit\u00E0/inquinamento ed elementi fisici."@it ,
+		"The ontology used in the WHOW project to represent the observations related to different aspects of water: quality/pollution and physical elements."@en ;
+	owl:versionInfo	"version 0.5 - added 'with respect to reference param' property to connect the water observations to an additional reference parameter. The property is used to model the hydrometric zero when observing the lake height"@en ;
+	dcterms:description	"L'ontologia utilizzata nel progetto WHOW per rappresentare le osservazioni relative a diversi aspetti dell'acqua: qualit\u00E0/inquinamento ed elementi fisici."@it ,
+		"The ontology used in the WHOW project to represent the observations related to different aspects of water: quality/pollution and physical elements."@en ;
+	dcterms:issued	"2022-07-20"^^xsd:date ;
+	dcterms:title	"Water Monitoring Ontology"@en ,
+		"Ontologia del Monitoraggio delle Acque"@it ;
+	owl:versionIRI	<https://w3id.org/whow/onto/water-monitoring/0.5> ;
+	dc:description	<https://raw.githubusercontent.com/whow-project/semantic-assets/main/ontologies/graphical-representation-ontologies/water-monitoring.png> .
+ns12:FeatureOfInterest	rdf:type	owl:Class .
+ns12:MonitoringFacility	rdf:type	owl:Class .
+ns12:Observation	rdf:type	owl:Class .
+ns12:ObservationParameter	rdf:type	owl:Class .
+ns12:ObservationValue	rdf:type	owl:Class .
+@prefix ns20:	<https://w3id.org/italia/env/onto/place/> .
+ns20:Municipality	rdf:type	owl:Class .
+ns20:Province	rdf:type	owl:Class .
+ns20:hasMunicipality	rdf:type	owl:ObjectProperty .
+ns20:hasProvince	rdf:type	owl:ObjectProperty .
+ns4:associatedWith	rdf:type	owl:ObjectProperty .
+ns5:BiologicalAgent	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:WaterObservablePropertyObject ;
+	rdfs:label	"Biological Agent"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"This class represents all the biological and microbiological agents that are available in the water be it surface and groundwater or drinking water (e.g., phytoplankton, macrophytes, phytobenthos, benthic invertebrate fauna and fish, bacteria such as coliforms)."@en ;
+	owl:disjointWith	ns5:ChemicalSubstance ,
+		ns5:RadioactivityObject .
+ns5:DrinkingWaterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:WaterObservation ;
+	rdfs:label	"Drinking Water Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of observations of water intended for human consumption."@en ;
+	owl:disjointWith	ns5:SurfaceOrGroundwaterObservation .
+ns5:ObservationValue	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10039 ,
+		ns12:ObservationValue ;
+	rdfs:label	"Observation Value"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The result of an observation. It is a value  or a range of values which is charaterised by the value(s) ifself(themselves) and , when applicable, by a unit of measure."@en .
+ns5:RadioactivityObject	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:WaterObservablePropertyObject ;
+	rdfs:label	"Radioactivity Object"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"This class represents the radioactivity object. Examples are randon 22, nuclide, etc."@en .
+ns5:Range	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Characteristic ;
+	rdfs:label	"Range (of Values)"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of value intervals. Examples: the value of the observation of the concentration of copepr is <10, meaning between 0 and 10, etc."@en .
+ns5:SamplingPoint	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Location ,
+		_:b10042 ,
+		ns16:FeatureOfInterest ;
+	rdfs:label	"Sampling Point"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The point, also considered as a location (address), where the water sample is taken or collected."@en .
+ns5:SurfaceOrGroundwaterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:WaterObservation ;
+	rdfs:label	"Surface or Groundwater Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of observations of surface and ground waters."@en .
+ns5:WaterBiologicalQualityParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10044 ,
+		_:b10043 ,
+		ns5:SurfaceOrGroundwaterObservation ;
+	rdfs:label	"Water Biological Quality Parameter/Element Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Observation of biological quality elements parameters according to the European Environmental Agency (EEA): phytoplankton, macrophytes, phytobenthos, benthic invertebrate fauna and fish. The most frequently classified biological  quality elements are, for rivers, benthic invertebrates, phytobenthos/other aquatic flora/macrophytes and fish; for lakes, phytoplankton; and for transitional and coastal waters, phytoplankton and benthic invertebrates. (2018)"@en ;
+	owl:disjointWith	ns5:WaterHydromorphologicalParameterObservation ,
+		ns5:WaterPhysicoChemicalParameterObservation .
+ns5:WaterChemicalParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10045 ,
+		_:b10046 ,
+		ns5:DrinkingWaterObservation ;
+	rdfs:label	"Water Chemical Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of all the observations of chemcal paraemeters of the water. Examples include the observations of the nickel, selenium, etc."@en ;
+	owl:disjointWith	ns5:WaterMicrobiologicalParameterObservation ,
+		ns5:WaterIndicatorParameterObservation .
+ns5:WaterEmergingParametersObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:DrinkingWaterObservation ;
+	rdfs:label	"Water Emerging Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of all the observations of emerging paraemeters of the water. They are called emerging because of their interest in recent years.  Examples include the observations of the Thallium, perfluoroalkyl substances etc."@en ;
+	owl:disjointWith	ns5:WaterMicrobiologicalParameterObservation .
+ns5:WaterHydromorphologicalParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:SurfaceOrGroundwaterObservation ;
+	rdfs:label	"Water Hydromorphological Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Observation of hydromorphological elements according to the European Environmental Agency (EEA): hydrology, morphology, barriers. (2018)"@en ;
+	owl:disjointWith	ns5:WaterPhysicoChemicalParameterObservation .
+ns5:WaterIndicatorParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns5:DrinkingWaterObservation ;
+	rdfs:label	"Water Indicator Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of all the observations of indicator paraemeters of the water. Examples include the observations of the colour, taste, conductivity, etc."@en ;
+	owl:disjointWith	ns5:WaterMicrobiologicalParameterObservation .
+ns5:WaterMicrobiologicalParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10048 ,
+		_:b10047 ,
+		ns5:DrinkingWaterObservation ;
+	rdfs:label	"Water Microbiological Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of all the observations of microbiological paraemeters of the water. Examples include the observations of the Escherichia coli, etc."@en .
+ns5:WaterObservableProperty	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10049 ,
+		ns12:ObservationParameter ;
+	rdfs:label	"Water Observable Property"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"An observable quality (parameter, characteristic) of the observation for a feature of interest."@en .
+ns5:WaterObservablePropertyObject	rdf:type	owl:Class ;
+	rdfs:subClassOf	skos:Concept ,
+		ns4:Entity ,
+		_:b10050 ;
+	rdfs:label	"Water Observable Property Object"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The specific object of the property observed. Examples are: biological agents, chemical substances, and radioactivity objects"@en .
+ns5:WaterObservablePropertyObjectType	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Concept ,
+		ns4:Characteristic ;
+	rdfs:label	"Water Observable Property Object Type "@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The type of the object of the water property observed."@en .
+ns5:WaterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10056 ,
+		_:b10057 ,
+		_:b10051 ,
+		_:b10052 ,
+		_:b10053 ,
+		_:b10054 ,
+		_:b10055 ,
+		ns12:Observation ;
+	rdfs:label	"Water Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"A specific observation regarding water be it drinking water or surface or graoudwater.  It can be an observation related to quality parameters (e.g., the concentration of a specific chemical substance) or physical parameters (e.g., the level of water in a river) or the concentration of radioactivity that may apply for both drinking and surface/ground waters"@en .
+ns5:WaterPhysicoChemicalParameterObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10058 ,
+		_:b10059 ,
+		ns5:SurfaceOrGroundwaterObservation ;
+	rdfs:label	"Water Physico-Chemical Parameter Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Observation of physico-chemical elements according to the European Environmental Agency (EEA):  nutrients, organic pollution, acidification. (2018)"@en .
+ns5:WaterRadioactivityObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10060 ,
+		_:b10061 ,
+		ns5:WaterObservation ;
+	rdfs:label	"Water Radioactivity Observation"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The class of observations related to the level of radioactivity."@en .
+ns5:WaterSample	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10062 ,
+		_:b10063 ,
+		_:b10064 ,
+		_:b10065 ,
+		ns17:WaterFeature ;
+	rdfs:label	"Water Sample"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"A specific water feature which is intended to be representative of a FeatureOfInterest on which water observations may be made. They are used in situations where observations cannot be made directly on the ultimate feature of interest, either because the entire feature cannot be observed, or because it is more convenient to use a proxy"@en .
+ns5:WaterSampler	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10066 ,
+		_:b10067 ,
+		ns12:Sampler ;
+	rdfs:label	"Water Sampler"@en ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Any device or monitoring object that is used to obtain a water sample."@en .
+ns5:hasBiologicalAgent	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns5:hasWaterObservablePropertyObject ;
+	rdfs:label	"has biological agent"@en ;
+	rdfs:domain	_:b10032 ;
+	rdfs:range	ns5:BiologicalAgent ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasChemicalSubstance	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns5:hasWaterObservablePropertyObject ;
+	rdfs:label	"has chemical substance"@en ;
+	rdfs:domain	_:b10036 ;
+	rdfs:range	ns5:ChemicalSubstance ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasDepth	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has depth"@en ;
+	rdfs:domain	ns5:WaterSample ;
+	rdfs:range	ns4:Value ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Property used to represent the depth of a water body, typically of a lake."@en .
+ns5:hasObservationSample	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has observation sample"@en ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns5:WaterSample ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasRadioactivityObject	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns5:hasWaterObservablePropertyObject ;
+	rdfs:label	"has radioactivity object"@en ;
+	rdfs:domain	ns5:WaterRadioactivityObservation ;
+	rdfs:range	ns5:RadioactivityObject ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasResult	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has result"@en ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns5:ObservationValue ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasWaterFeature	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns12:hasFeatureOfInterest ;
+	rdfs:label	"has water feature"@en ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns17:WaterFeature ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	owl:versionInfo	"we are planning to move it in hydrography ontology"@en .
+ns5:hasWaterObservableProperty	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"has water observable property"@en ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns5:WaterObservableProperty ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:hasWaterObservablePropertyObject	rdf:type	owl:ObjectProperty ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns5:WaterObservablePropertyObject ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:seeAlso	"has water observable property object"@en .
+ns5:isObtainedBy	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"is obtained by"@en ;
+	rdfs:domain	ns5:WaterSample ;
+	rdfs:range	ns5:WaterSampler ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:isSampleOf	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"is sample of"@en ;
+	rdfs:domain	ns5:WaterSample ;
+	rdfs:range	ns17:WaterFeature ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:isSamplingPointOfWaterSample	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns4:associatedWith ;
+	owl:inverseOf	ns5:isTakenAt ;
+	rdfs:label	"is sampling point of water sample"@en ;
+	rdfs:domain	ns5:SamplingPoint ;
+	rdfs:range	ns5:WaterSample ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Inverse property of 'is taken at' used to link the sampling point to the related water sample collected in that point."@en .
+ns5:isTakenAt	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns4:associatedWith ;
+	rdfs:label	"is taken at"@en ;
+	rdfs:domain	ns5:WaterSample ;
+	rdfs:range	ns5:SamplingPoint ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The property is used to link the water sample to the sampling point where it was taken or collected."@en .
+ns5:lowerBound	rdf:type	owl:DatatypeProperty ;
+	rdfs:label	"lower bound"@en ;
+	rdfs:domain	ns5:Range ;
+	rdfs:range	xsd:decimal ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The lower bound in a range of values"@en .
+ns5:lowerBoundIncluded	rdf:type	owl:DatatypeProperty ;
+	rdfs:label	"lower bound included"@en ;
+	rdfs:domain	ns5:Range ;
+	rdfs:range	xsd:decimal ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The property represents the lower bound in an interval of values that is included in the interval itself"@en .
+ns5:ofPropertyObject	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"of property object"@en ;
+	rdfs:domain	ns5:WaterObservableProperty ;
+	rdfs:range	ns5:WaterObservablePropertyObject ;
+	rdfs:isDefinedBy	ns7:water-monitoring .
+ns5:upperBound	rdf:type	owl:DatatypeProperty ;
+	rdfs:label	"upper bound"@en ;
+	rdfs:domain	ns5:Range ;
+	rdfs:range	xsd:decimal ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The upper bound in a range of values"@en .
+ns5:upperBoundIncluded	rdf:type	owl:DatatypeProperty ;
+	rdfs:label	"upper bound included"@en ;
+	rdfs:domain	ns5:Range ;
+	rdfs:range	xsd:decimal ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"The property represents the upper bound in an interval of values that is included in the interval itself"@en .
+ns5:withRespectToReferenceParam	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns4:associatedWith ;
+	rdfs:label	"with respect to reference param"@en ;
+	rdfs:domain	ns5:WaterObservation ;
+	rdfs:range	ns4:Parameter ;
+	rdfs:isDefinedBy	ns7:water-monitoring ;
+	rdfs:comment	"Property that connects the water observation to a conventional reference parameter. This property has been introduced to manage parameters like the hydrometric zero with respect to the observation of height of lakes."@en .
+@prefix ns21:	<https://w3id.orgitalia/onto/TI/> .
+ns21:TimeInstant	rdf:type	owl:Class .
+ns12:Platform	rdf:type	owl:Class .
+ns12:Sensor	rdf:type	owl:Class .
+ns12:hasObservationParameter	rdf:type	owl:ObjectProperty .
+ns12:hasSensorType	rdf:type	owl:ObjectProperty .
+ns12:isHostedBy	rdf:type	owl:ObjectProperty .
+ns12:isObservationMadeBySensor	rdf:type	owl:ObjectProperty .
+ns20:Geometry	rdf:type	owl:Class .
+ns20:hasGeometry	rdf:type	owl:ObjectProperty .
+ns4:TimeInterval	rdf:type	owl:Class .
+ns7:weather-monitoring	rdf:type	owl:Ontology ;
+	dcterms:modified	"2023-02-13"^^xsd:date ;
+	rdfs:label	"Ontologia per il monitoraggio meteo"@it ,
+		"Weather Monitoring Ontology"@en ;
+	owl:imports	ns12: ,
+		ns20: ;
+	dcterms:issued	"2023-01-30"^^xsd:date ;
+	owl:versionIRI	<https://w3id.org/whow/onto/weather-monitoring/0.1> ;
+	dc:description	<https://raw.githubusercontent.com/whow-project/semantic-assets/main/ontologies/graphical-representation-ontologies/weather-monitoring.png> .
+@prefix ns22:	<https://w3id.org/whow/onto/weather-monitoring/> .
+ns22:Air	rdf:type	owl:NamedIndividual ,
+		ns22:WeatherFeatureOfInterest ;
+	rdfs:label	"Air"@en ,
+		"Aria"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	owl:versionInfo	"provvisoria"@it ,
+		"unstable"@en .
+ns22:GroundLevelSoil	rdf:type	owl:NamedIndividual ,
+		ns22:WeatherFeatureOfInterest ;
+	rdfs:label	"All'altezza del suolo"@it ,
+		"Ground Level Soil"@en ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	owl:versionInfo	"provvisoria"@it ,
+		"unstable"@en .
+ns22:Rainfall	rdf:type	owl:NamedIndividual ,
+		ns22:WeatherFeatureOfInterest ;
+	rdfs:label	"Pioggia"@it ,
+		"Rainfall"@en ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	owl:versionInfo	"provvisoria"@it ,
+		"unstable"@en .
+ns22:Snow	rdf:type	owl:NamedIndividual ,
+		ns22:WeatherFeatureOfInterest ;
+	rdfs:label	"Snow"@en ,
+		"Neve"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	owl:versionInfo	"provvisoria"@it ,
+		"unstable"@en .
+ns22:WeatherFeatureOfInterest	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns12:FeatureOfInterest ;
+	rdfs:label	"Caratteristica di Interesse Meteorologica"@it ,
+		"Weather Feature of Interest"@en ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"La classe delle caratteristiche di interesse per il meteo. Esempi includono: aria, pioggia, livello del suolo, neve, ecc."@it ,
+		"The class of feature of interest specific for the meteo domain. Examples include: Air, Wind, Rainfall, Snow, etc."@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:WeatherObservableProperty	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns12:ObservationParameter ;
+	rdfs:label	"Propriet\u00E0 Meteorologica Osservabile"@it ,
+		"Weather Observable Property"@en ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"The class of all the possible weather observable properties. Examples include: global radiation, the quantity of rainfall, the temperature of the air,, the level of snow, etc."@en ,
+		"La classe di tutte le possibile propriet\u00E0 osservabili relative alle rilevazioni meteorologiche. Per esempio, sono propriet\u00E0 osservabili le precipitazioni, la radiazione globale, la temperatura dell'aria, l'altezza della neve, ecc."@it ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:WeatherObservation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10072 ,
+		_:b10073 ,
+		_:b10068 ,
+		_:b10069 ,
+		_:b10070 ,
+		_:b10071 ,
+		ns12:Observation ;
+	rdfs:label	"Weather Observation"@en ,
+		"Osservazione Meteo"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Una specifica osservazione fatta nel contesto delle rilevazioni meteorologiche."@it ,
+		"A specific type of observation obtained in the context of meteorogical measurements."@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:WeatherSensor	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10076 ,
+		_:b10074 ,
+		_:b10075 ,
+		ns12:Sensor ;
+	rdfs:label	"Weather Sensor"@en ,
+		"Sensore Meteo"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"The class of the weather sensor used to detect specific weather property."@en ,
+		"La classe dei sensori meteo utilizzati per le rilevazioni meteorologiche."@it ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:WeatherSensorType	rdf:type	owl:Class ;
+	rdfs:subClassOf	ns4:Concept ;
+	rdfs:label	"Weather Sensor Type"@en ,
+		"Tipo di Sensore Meteo"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"La classe dei tipi di sensori meteo. Per esempio: termometro, pluviometro ecc."@it ,
+		"The class of the various types of weather sensor. For instance: pluviometer , thermometer etc."@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:WeatherStation	rdf:type	owl:Class ;
+	rdfs:subClassOf	_:b10077 ,
+		ns12:Platform ;
+	rdfs:label	"Weather Station"@en ,
+		"Stazione Meteo"@it ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Una specifica piattaforma che ospita sensori per le rilevazioni meteorologiche."@it ,
+		"A specific type of platform hosting also different sensors that are used to detect weather conditions."@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:Wind	rdf:type	owl:NamedIndividual ,
+		ns22:WeatherFeatureOfInterest ;
+	rdfs:label	"Vento"@it ,
+		"Wind"@en ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	owl:versionInfo	"provvisoria"@it ,
+		"unstable"@en .
+ns22:hasObservedWeatherProperty	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns12:hasObservationParameter ;
+	rdfs:label	"ha propriet\u00E0 meteorologica osservata"@it ,
+		"has observed weather property"@en ;
+	rdfs:domain	ns22:WeatherObservation ;
+	rdfs:range	ns22:WeatherObservableProperty ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Property that links the weather observation to its weather property (e.g., global radiation, temperature, etc.)"@en ,
+		"Propriet\u00E0 che collega l'osservazione meteorologica alla sua propriet\u00E0 meteorologica osservata (e.g., radiazione globale, temperatura, precipazione, ecc.)"@it ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:hasResultTime	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns4:atTime ;
+	rdfs:label	"has result time"@en ,
+		"ha tempo del risultato"@it ;
+	rdfs:domain	ns22:WeatherObservation ;
+	rdfs:range	ns21:TimeInstant ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Property used to model the time instant in which the (weather) observation is done."@en ,
+		"Propriet\u00E0 utilizzata per modellare l'istante temporale in cui viene fatta l'osservazione (meteorologica)."@it ;
+	owl:versionInfo	"provvisorio"@it ,
+		"unstable"@en .
+ns22:hasValidityPeriod	rdf:type	owl:ObjectProperty ;
+	rdfs:label	"ha periodo di validit\u00E0"@it ,
+		"has validity period"@en ;
+	rdfs:domain	ns22:WeatherSensor ;
+	rdfs:range	ns4:TimeInterval ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Property used to model a period of time of validity of a sensor"@en ,
+		"Propriet\u00E0 utilizzata per modellare un periodo di tempo di validit\u00E0 di un sensore"@en ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+ns22:hasWeatherFeatureOfInterest	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns12:hasFeatureOfInterest ;
+	rdfs:label	"has weather feature of interest"@en ,
+		"ha caratteristica di interesse meteorologica"@it ;
+	rdfs:domain	ns22:WeatherObservation ;
+	rdfs:range	ns22:WeatherFeatureOfInterest ;
+	rdfs:isDefinedBy	ns7:weather-monitoring ;
+	rdfs:comment	"Property that links a meteorological observation to its meteorological characteristic of interest. Example: If the observed property is 'precipitation' then the meteorological observation can be linked to rainfall as a characteristic of interest."@en ,
+		"Propriet\u00E0 che collega un'osservazione meteorologica alla propria caratteristica di interesse meteorologica. Esempio: se la propriet\u00E0 osservata \u00E8 la precipitazione allora l'osservazione meteorologica pu\u00F2 essere collegata alla pioggia come caratteristica di interesse."@it ;
+	owl:versionInfo	"stable"@en ,
+		"stabile"@it .
+_:b10003	rdf:type	owl:Class ;
+	owl:unionOf	_:b10004 .
+_:b10004	rdf:first	ns8:Disease ;
+	rdf:rest	_:b10005 .
+_:b10005	rdf:first	ns8:DiseaseType ;
+	rdf:rest	rdf:nil .
+_:b10007	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:isClassifiedBy ;
+	owl:allValuesFrom	ns8:GroupCauseOfDeath .
+_:b10008	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:hasScope ;
+	owl:allValuesFrom	ns4:Concept .
+_:b10009	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:hasCriterion ;
+	owl:someValuesFrom	ns8:Criterion .
+_:b10010	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:value ;
+	owl:someValuesFrom	rdfs:Literal .
+_:b10011	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:identifier ;
+	owl:someValuesFrom	rdfs:Literal .
+_:b10012	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:name ;
+	owl:someValuesFrom	rdf:PlainLiteral .
+_:b10013	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:isTerritoriallyCompetentFor ;
+	owl:allValuesFrom	ns8:InpatientFacility .
+_:b10014	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:isClassifiedBy ;
+	owl:allValuesFrom	ns8:IndicatorType .
+_:b10015	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:atTime ;
+	owl:someValuesFrom	ns4:TemporalEntity .
+_:b10016	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:hasHealthcareIndicatorValue ;
+	owl:someValuesFrom	ns4:Value .
+_:b10017	rdf:type	owl:Restriction ;
+	owl:onProperty	ns12:isIndicatorOf ;
+	owl:allValuesFrom	ns8:HealthOrganisation .
+_:b10018	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:ofClinicalCohort ;
+	owl:allValuesFrom	ns8:ClinicalCohort .
+_:b10019	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:subIndicator ;
+	owl:allValuesFrom	ns8:HealthcareIndicatorCalculation .
+_:b10020	rdf:type	owl:Restriction ;
+	owl:onProperty	ns8:totalValue ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange	xsd:float .
+_:b10021	rdf:type	owl:Restriction ;
+	owl:onProperty	ns17:isSubWaterBasin ;
+	owl:allValuesFrom	ns17:WaterBasin .
+_:b10022	rdf:type	owl:Restriction ;
+	owl:onProperty	ns17:belongsToWaterBasin ;
+	owl:someValuesFrom	ns17:WaterBasin .
+_:b10023	rdf:type	owl:Restriction ;
+	owl:onProperty	ns17:belongsToWaterBasin ;
+	owl:allValuesFrom	ns17:WaterBasin .
+_:b10024	rdf:type	owl:Restriction ;
+	owl:onProperty	ns9:hasWaterIndicatorParameter ;
+	owl:allValuesFrom	ns9:WaterIndicatorParameter .
+_:b10025	rdf:type	owl:Restriction ;
+	owl:onProperty	ns9:isWaterIndicatorOf ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onClass	ns9:WaterIndicatorCalculation .
+_:b10026	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:hasValue ;
+	owl:someValuesFrom	ns4:Value .
+_:b10027	rdf:type	owl:Restriction ;
+	owl:onProperty	ns19:isWaterIndicatorCalculationOf ;
+	owl:someValuesFrom	ns17:WaterFeature .
+_:b10028	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:hasValue ;
+	owl:allValuesFrom	ns4:Value .
+_:b10029	rdf:type	owl:Restriction ;
+	owl:onProperty	ns19:isWaterIndicatorCalculationOf ;
+	owl:allValuesFrom	ns17:WaterFeature .
+_:b10030	rdf:type	owl:Restriction ;
+	owl:onProperty	ns9:forWaterIndicator ;
+	owl:onClass	ns9:WaterIndicator ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
+_:b10031	rdf:type	owl:Restriction ;
+	owl:onProperty	ns9:parametrizes ;
+	owl:allValuesFrom	ns4:Value .
+_:b10032	rdf:type	owl:Class ;
+	owl:unionOf	_:b10033 .
+_:b10033	rdf:first	ns5:WaterBiologicalQualityParameterObservation ;
+	rdf:rest	_:b10034 .
+_:b10034	rdf:first	ns5:WaterMicrobiologicalParameterObservation ;
+	rdf:rest	rdf:nil .
+_:b10035	rdf:first	ns5:WaterChemicalParameterObservation ;
+	rdf:rest	_:b10037 .
+_:b10036	rdf:type	owl:Class ;
+	owl:unionOf	_:b10035 .
+_:b10037	rdf:first	ns5:WaterPhysicoChemicalParameterObservation ;
+	rdf:rest	rdf:nil .
+_:b10038	rdf:first	ns4:Value ;
+	rdf:rest	_:b10040 .
+_:b10039	rdf:type	owl:Class ;
+	owl:unionOf	_:b10038 .
+_:b10040	rdf:first	ns5:Range ;
+	rdf:rest	rdf:nil .
+_:b10042	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:isSamplingPointOfWaterSample ;
+	owl:allValuesFrom	ns5:WaterSample .
+_:b10043	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasBiologicalAgent ;
+	owl:someValuesFrom	ns5:BiologicalAgent .
+_:b10044	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasBiologicalAgent ;
+	owl:allValuesFrom	ns5:BiologicalAgent .
+_:b10045	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasChemicalSubstance ;
+	owl:someValuesFrom	ns5:ChemicalSubstance .
+_:b10046	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasChemicalSubstance ;
+	owl:allValuesFrom	ns5:ChemicalSubstance .
+_:b10047	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasBiologicalAgent ;
+	owl:someValuesFrom	ns5:BiologicalAgent .
+_:b10048	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasBiologicalAgent ;
+	owl:allValuesFrom	ns5:BiologicalAgent .
+_:b10049	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:ofPropertyObject ;
+	owl:allValuesFrom	ns5:WaterObservablePropertyObject .
+_:b10050	rdf:type	owl:Restriction ;
+	owl:onProperty	ns4:isClassifiedBy ;
+	owl:allValuesFrom	ns5:WaterObservablePropertyObjectType .
+_:b10051	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasResult ;
+	owl:someValuesFrom	ns5:ObservationValue .
+_:b10052	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasWaterObservableProperty ;
+	owl:someValuesFrom	ns5:WaterObservableProperty .
+_:b10053	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasObservationSample ;
+	owl:allValuesFrom	ns5:WaterSample .
+_:b10054	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasResult ;
+	owl:allValuesFrom	ns5:ObservationValue .
+_:b10055	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasWaterObservableProperty ;
+	owl:allValuesFrom	ns5:WaterObservableProperty .
+_:b10056	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasWaterObservablePropertyObject ;
+	owl:allValuesFrom	ns5:WaterObservablePropertyObject .
+_:b10057	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:withRespectToReferenceParam ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onClass	ns4:Parameter .
+_:b10058	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasChemicalSubstance ;
+	owl:someValuesFrom	ns5:ChemicalSubstance .
+_:b10059	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasChemicalSubstance ;
+	owl:allValuesFrom	ns5:ChemicalSubstance .
+_:b10060	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasRadioactivityObject ;
+	owl:someValuesFrom	ns5:RadioactivityObject .
+_:b10061	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:hasRadioactivityObject ;
+	owl:allValuesFrom	ns5:RadioactivityObject .
+_:b10062	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:isObtainedBy ;
+	owl:someValuesFrom	ns5:WaterSampler .
+_:b10063	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:isSampleOf ;
+	owl:someValuesFrom	ns17:WaterFeature .
+_:b10064	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:isObtainedBy ;
+	owl:allValuesFrom	ns5:WaterSampler .
+_:b10065	rdf:type	owl:Restriction ;
+	owl:onProperty	ns5:isTakenAt ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onClass	ns5:SamplingPoint .
+_:b10066	rdf:type	owl:Restriction ;
+	owl:onProperty	ns20:hasMunicipality ;
+	owl:someValuesFrom	ns20:Municipality .
+_:b10067	rdf:type	owl:Restriction ;
+	owl:onProperty	ns20:hasProvince ;
+	owl:someValuesFrom	ns20:Province .
+_:b10068	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasObservedWeatherProperty ;
+	owl:allValuesFrom	ns22:WeatherObservableProperty .
+_:b10069	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasWeatherFeatureOfInterest ;
+	owl:allValuesFrom	ns22:WeatherFeatureOfInterest .
+_:b10070	rdf:type	owl:Restriction ;
+	owl:onProperty	ns12:isObservationMadeBySensor ;
+	owl:onClass	ns22:WeatherSensor ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
+_:b10071	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasObservedWeatherProperty ;
+	owl:onClass	ns22:WeatherObservableProperty ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
+_:b10072	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasResultTime ;
+	owl:onClass	ns21:TimeInstant ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
+_:b10073	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasWeatherFeatureOfInterest ;
+	owl:onClass	ns22:WeatherFeatureOfInterest ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
+_:b10074	rdf:type	owl:Restriction ;
+	owl:onProperty	ns12:isHostedBy ;
+	owl:allValuesFrom	ns22:WeatherStation .
+_:b10075	rdf:type	owl:Restriction ;
+	owl:onProperty	ns12:hasSensorType ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onClass	ns22:WeatherSensorType .
+_:b10076	rdf:type	owl:Restriction ;
+	owl:onProperty	ns22:hasValidityPeriod ;
+	owl:maxQualifiedCardinality	"1"^^xsd:nonNegativeInteger ;
+	owl:onClass	ns4:TimeInterval .
+_:b10077	rdf:type	owl:Restriction ;
+	owl:onProperty	ns20:hasGeometry ;
+	owl:onClass	ns20:Geometry ;
+	owl:qualifiedCardinality	"1"^^xsd:nonNegativeInteger .
