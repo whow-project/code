@@ -1,0 +1,7 @@
+rake_keyword==0.0.1
+keybert==0.8.4
+pandas==1.5.1
+fitz==0.0.1.dev2
+rake==1.0
+rake_nltk==1.0.6
+rdflib==7.0.0
